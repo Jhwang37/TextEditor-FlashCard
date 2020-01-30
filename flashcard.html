@@ -1,81 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
-      
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-      <script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
-      <link rel="stylesheet" type="text/css" href="style.css">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Erica Lim Flash Card</title>
-</head>
-<body>
-	<div class="jumbotron bg-transparent">
-         <h1 class="display-4">Flash Card Maker</h1>
-         <p class="lead">L/R Arrow Keys for previous/next, Up/Down for front/back, Enter for adding a card. </p>
-         <hr class="my-4">
-         <p class="lead">
-			</p>
-      </div>
-  <p id="front">
-    <!-- term lives here   -->
-  </p><br>
-  <hr><br>
-  <div id="back">
-    <!-- definition lives here   -->
-  </div><br>
-  <div id ="activeCardButtons">
-    <button id="prev" onclick="prevCard()">Previous Card
+	<head>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script src="https://cdn.ckeditor.com/ckeditor5/16.0.0/classic/ckeditor.js"></script>
+		<link rel="stylesheet" type="text/css" href="style.css">
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+					<title>Erica Lim Flash Card</title>
+				</head>
+				<body>
+					<div class="jumbotron bg-transparent">
+						<h1 class="display-4">Flash Card Maker</h1>
+						<p class="lead">L/R Arrow Keys for previous/next, Up/Down for front/back, Enter for adding a card. </p>
+						<a href="Test.html">Text Editor</a>
+						<hr class="my-4">
+							<p class="lead"></p>
+						</div>
+						<p id="front">
+							<!-- term lives here   -->
+						</p>
+						<br>
+							<hr>
+								<br>
+									<div id="back">
+										<!-- definition lives here   -->
+									</div>
+									<br>
+										<div id ="activeCardButtons">
+											<button id="prev" onclick="prevCard()">Previous Card
   </button>
-  <button id="flip" type="button" value="Flip" onclick="flash()">
+											<button id="flip" type="button" value="Flip" onclick="flash()">
   Flip</button>
-  <button id="next" onclick="nextCard()">Next Card
+											<button id="next" onclick="nextCard()">Next Card
   </button>
-  </div>
-  <br>
-  <br>
-  <br>
-  <div id="formContainer">
-    <form id="cardForm">
-      <input id="newTerm" type="text" placeholder="Add term" onKeyDown="if(event.keyCode==13) document.getElementById('newDef').focus()">
-      <input id="newDef" type="text" placeholder="Add definition" onKeyDown="if(event.keyCode==13) cardAdd()">
-      <br>
-      <input id="submit" type="button" value="Add to Deck" onClick="cardAdd()">
-      <br>
-      <input id="clearDeck" type="button" value="Clear Deck" onClick="emptyDeck()">
-    </form>
-    <br>
-  </div>
-<select id="selectCards" style="display:none;">
-
-</select>
-  <div id="importExport">
-    
-	  <div id="import"> 
-		  <h2 style="text-align:center;">Import</h2>
-		  <p>choose a local file containing a <code>.json</code> array of cards, and then click below!</p>
-		  <input id="uploadDeck" type="file"></input>
-	  <button id="deckSubmit" onclick="upload_deck()">Choose a File and Click Here</button>
-	  
-	</div>
-	
-	<div id="export"> 
-		 <a class="close" id="close" onclick="slideOut()"></a>
-		<h2 style="text-align:center;color:white;">Export</h2>
-		<p style="color:black;">Click below to save a local <code>.json</code> file containing the current deck.</p>
-		
-		<button id="saveDeck" onclick="download_deck()">Save this Deck?</button>
-</div>
- 
-  </div>
-<a class="activator" id="activator" onclick="slideIn()">Click Here to Import & Export/Save Decks of Cards</a>
-      <script type="text/javascript">
-
-    </script>
-    <script>
+										</div>
+										<br>
+											<br>
+												<br>
+													<div id="formContainer">
+														<form id="cardForm">
+															<input id="newTerm" type="text" placeholder="Add term" onKeyDown="if(event.keyCode==13) document.getElementById('newDef').focus()">
+																<input id="newDef" type="text" placeholder="Add definition" onKeyDown="if(event.keyCode==13) cardAdd()">
+																	<br>
+																		<input id="submit" type="button" value="Add to Deck" onClick="cardAdd()">
+																			<br>
+																				<input id="clearDeck" type="button" value="Clear Deck" onClick="emptyDeck()">
+																				</form>
+																				<br>
+																				</div>
+																				<select id="selectCards" style="display:none;"></select>
+																				<div id="importExport">
+																					<div id="import">
+																						<h2 style="text-align:center;">Import</h2>
+																						<p>choose a local file containing a 
+																							<code>.json</code> array of cards, and then click below!
+																						</p>
+																						<input id="uploadDeck" type="file"></input>
+																						<button id="deckSubmit" onclick="upload_deck()">Choose a File and Click Here</button>
+																					</div>
+																					<div id="export">
+																						<a class="close" id="close" onclick="slideOut()"></a>
+																						<h2 style="text-align:center;color:white;">Export</h2>
+																						<p style="color:black;">Click below to save a local 
+																							<code>.json</code> file containing the current deck.
+																						</p>
+																						<button id="saveDeck" onclick="download_deck()">Save this Deck?</button>
+																					</div>
+																				</div>
+																				<a class="activator" id="activator" onclick="slideIn()">Click Here to Import & Export/Save Decks of Cards</a>
+																				<script type="text/javascript"></script>
+																				<script>
     	function Card(term, definition, category) {
   this.term = term;
   this.definition = definition;
@@ -295,6 +292,7 @@ function updateDeck() {
 
 
 
-    </script>
-</body>
-</html>
+    
+																				</script>
+																			</body>
+																		</html>
